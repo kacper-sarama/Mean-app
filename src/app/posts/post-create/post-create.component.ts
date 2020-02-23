@@ -12,16 +12,14 @@ export class PostCreateComponent {
   enteredTitle = "";
   enteredContent = "";
 
-  constructor(public postsService: PostsService) {}
+  constructor(public postsService: PostsService) { }
 
-  onAddPost(postForm: NgForm) {
-    if (postForm.valid) {
-      console.log(postForm.control.value);
-      this.postsService.addPostToPostList(postForm.control.value);
-      postForm.resetForm();
-    } else {
+  onAddPost(postForm) {
+    if (postForm.invalid) {
       return;
     }
+    this.postsService.addPostToPostList(postForm.value.title, postForm.value.content);
+    postForm.resetForm();
   }
 
 }
